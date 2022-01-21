@@ -23,4 +23,5 @@ function validateUrl(value)
         value
     );
 }
-module.exports={isValidRequestBody,isValid,validhttpsLower,validhttpsUpper,validateUrl}
+
+module.exports = {isValidRequestBody,isValid,validhttpsLower,validhttpsUpper,validateUrl}

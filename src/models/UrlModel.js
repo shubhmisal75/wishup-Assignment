@@ -8,13 +8,11 @@ const UrlSchema = new mongoose.Schema({
         required: "longUrl is mandatory ",
         lowercase: true
     },
-
     shortUrl: {
         type: String,
         required: "shortUrl is mandatory",
         unique: true
     },
-
     urlCode: {
         type: String,
         required: "urlCode is mandatory",
