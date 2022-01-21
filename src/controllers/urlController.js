@@ -1,12 +1,14 @@
-const mongoose = require('mongoose')
 const UrlModel = require('../models/UrlModel')
-const validation = require("../validator/validator");
+const validation = require("../validators/validator");
 const validUrl = require('valid-url')
 const shortid = require('shortid')
 const redis = require("redis");
 const { promisify } = require("util");
 
-//Connect to redis
+
+//-------------------------Connect to redis-------------------------------------//
+
+
 const redisClient = redis.createClient(
     18002,
     "redis-18002.c232.us-east-1-2.ec2.cloud.redislabs.com",
@@ -29,13 +31,15 @@ const GET_ASYNC = promisify(redisClient.GET).bind(redisClient);
 
 
 //------------------------------------------create url-----------------------------------------------//
+
+
 const createUrl = async function (req, res) {
     try {
 
         const requestBody = req.body
         const LongURL = requestBody.longUrl;
         const baseUrl = 'http://localhost:3000'
-        // validation start
+       
         if (!validation.isValidRequestBody(requestBody)) {
             res.status(400).send({ status: false, message: 'Invalid request parameters. Please provide url details' })
             return
@@ -64,7 +68,7 @@ const createUrl = async function (req, res) {
             return res.status(400).send({ status: false, message: "Please provide valid URL" })
         }
 
-        // if valid, we create the url code
+        
         const URLCode = shortid.generate()
         if (validUrl.isUri(trimUrl)) {
 
@@ -88,7 +92,9 @@ const createUrl = async function (req, res) {
                     const urlDetails = { longUrl: trimUrl, shortUrl: ShortUrl, urlCode: URLCode }
 
                     const details = await UrlModel.create(urlDetails);
-                    res.status(201).json({ status: true, msg: "New Url create", data: urlDetails })
+
+                    const createdurl = await UrlModel.find(details).select({_id:0,createdAt:0,updatedAt:0,__v:0})
+                    res.status(201).json({ status: true, msg: "New Url create", data: createdurl })
                     return
                 }
             }
@@ -104,6 +110,8 @@ const createUrl = async function (req, res) {
 
 
 // -------------------------getAPI : redirect-----------------------------------------------//
+
+
 const getUrl = async function (req, res) {
     try {
 
