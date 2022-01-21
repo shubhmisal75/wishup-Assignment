@@ -14,7 +14,7 @@ The shortened URL is nearly one-fifth the size of the actual URL.
 Some of the use cases for URL shortening is to optimise links shared across users, easy tracking of individual links and sometimes hiding the affiliated original URLs.
 
 If you haven’t used tinyurl.com before, please try creating a new shortened URL and spend some time going through the various options their service offers. This will help you have a little context to the problem we solve through this project.
-
+-
 Key points
 Create a group database groupXDatabase. You can clean the db you previously used and reuse that.
 This time each group should have a single git branch. Coordinate amongst yourselves by ensuring every next person pulls the code last pushed by a team mate. You branch will be checked as part of the demo. Branch name should follow the naming convention project/urlShortnerGroupX
