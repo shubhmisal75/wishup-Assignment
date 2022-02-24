@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const urlController = require('../controllers/urlController')
+const userController = require('../controllers/userController')
 
 //--------------------------------------------------------------//
+router.post('/user',userController.createUser)
+router.get('/getusers',userController.getusers)
+router.get('/user/:id',userController.getuserbyid)
+router.put('/user/:id',userController.updateuser)
+router.delete('/user/:id',userController.deleteuser)
 
-router.post("/url/shorten", urlController.createUrl )
-
-router.get("/:urlcode", urlController.getUrl )
 
 module.exports = router;
+
